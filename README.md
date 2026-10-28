@@ -1,58 +1,147 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Notes App
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A small notes application built to practice and learn Laravel. The app provides a simple and friendly experience for creating and organizing personal notes.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- User registration and login
+- Edit user profile information
+- Upload and update profile avatars with FilePond
+- Create notes
+- View and search notes
+- Edit existing notes
+- Delete notes
+- Demo account with sample notes
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Technologies
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This project was built with:
 
-## Learning Laravel
+- Laravel
+- FilePond.js
+- Bootstrap
+- Vite
+- SQLite (default development database)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+It is intended as a small learning project for understanding Laravel basics, including authentication, controllers, models, migrations, seeders, Blade views, validation, file uploads, and database relationships.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### Requirements
 
-## Agentic Development
+- PHP 8.3 or newer
+- Composer
+- Node.js and npm
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### Setup
+
+1. Clone the repository and enter the project directory:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone <repository-url>
+cd example-app
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+2. Install the PHP dependencies:
 
-## Contributing
+```bash
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. Create the environment file:
 
-## Code of Conduct
+```bash
+cp .env.example .env
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+On Windows PowerShell, use:
 
-## Security Vulnerabilities
+```powershell
+Copy-Item .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+4. Generate the Laravel application key:
 
-## License
+```bash
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. Configure the database. The project uses SQLite by default, as defined in `.env.example`.
+
+Create the SQLite database file if it does not exist:
+
+```bash
+touch database/database.sqlite
+```
+
+On Windows PowerShell, use:
+
+```powershell
+New-Item database/database.sqlite
+```
+
+For a different database, update the `DB_*` values in `.env`, create the database, and then continue with the migration step.
+
+6. Create the private storage directories used for temporary avatar uploads and saved avatars:
+
+```bash
+mkdir -p storage/app/private/tmp storage/app/private/avatars
+```
+
+On Windows PowerShell, use:
+
+```powershell
+New-Item -ItemType Directory -Force storage/app/private/tmp, storage/app/private/avatars
+```
+
+The directories are used by the configured Laravel filesystem disks:
+
+- `storage/app/private/tmp` — temporary FilePond uploads
+- `storage/app/private/avatars` — final user avatar files
+
+7. Run the database migrations:
+
+```bash
+php artisan migrate
+```
+
+8. Seed the demo account and sample notes:
+
+```bash
+php artisan db:seed --class=DemoUserWithNotesSeeder
+```
+
+You can also reset and migrate the database before creating the demo data:
+
+```bash
+php artisan migrate:fresh
+php artisan db:seed --class=DemoUserWithNotesSeeder
+```
+
+9. Install the Node.js dependencies and build the frontend assets:
+
+```bash
+npm install
+npm run build
+```
+
+For frontend development with automatic asset rebuilding, run this in a separate terminal:
+
+```bash
+npm run dev
+```
+
+10. Start the Laravel development server:
+
+```bash
+php artisan serve
+```
+
+Open `http://localhost:8000` in your browser.
+
+## Demo Account
+
+Use the following credentials to test the application:
+
+- **Email:** `demo.notes@example.com`
+- **Password:** `NotesDemo123!`
