@@ -74,5 +74,7 @@
         </div>
     @endif
 
-    {{ $notes->links() }}
+    <div class="notes-pagination mt-4 d-flex justify-content-center">
+        {{ $notes->onEachSide(1)->links() }}
+    </div>
 @endsection

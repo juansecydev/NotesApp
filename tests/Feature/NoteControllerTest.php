@@ -216,6 +216,22 @@ class NoteControllerTest extends TestCase
     }
 
     /**
+     * The notes index displays ten notes per page.
+     */
+    public function test_index_displays_ten_notes_per_page(): void
+    {
+        $user = User::factory()->create();
+        Note::factory()->for($user)->count(11)->create();
+
+        $response = $this->actingAs($user)->get(route('notes.index'));
+
+        $response->assertOk()
+            ->assertViewHas('notes', function ($notes): bool {
+                return $notes->count() === 10 && $notes->perPage() === 10;
+            });
+    }
+
+    /**
      * Viewing another user's note returns not found.
      */
     public function test_show_returns_not_found_for_another_users_note(): void

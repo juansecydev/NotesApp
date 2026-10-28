@@ -27,7 +27,7 @@ class NoteController extends Controller
             'notes' => $request->user()->notes()
                 ->orderByDesc('note_created_at')
                 ->orderByDesc('note_id')
-                ->paginate(15),
+                ->paginate(10),
         ]);
     }
 
@@ -64,7 +64,7 @@ class NoteController extends Controller
 
         $note = $request->user()->notes()->create($validated);
 
-        //return redirect()->route('notes.show', $note)->with('status', 'Note created.');
+        // return redirect()->route('notes.show', $note)->with('status', 'Note created.');
         return redirect()->route('notes.index')->with('status', 'Note created.');
     }
 
