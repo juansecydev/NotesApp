@@ -28,6 +28,57 @@ const supportedNoteColors = ['primary', 'secondary', 'success', 'danger', 'warni
 const toastElement = document.querySelector('#app-toast');
 const toastTitle = toastElement?.querySelector('[data-toast-title]');
 const toastMessage = toastElement?.querySelector('[data-toast-message]');
+const themeStorageKey = 'notes-theme';
+
+/**
+ * Apply the selected color theme to Bootstrap and the application UI.
+ *
+ * @param {'light'|'dark'} theme The theme to apply.
+ * @returns {void}
+ */
+const applyTheme = (theme) => {
+    document.documentElement.setAttribute('data-bs-theme', theme);
+
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+        if (!(button instanceof HTMLElement)) {
+            return;
+        }
+
+        const isDark = theme === 'dark';
+        const icon = button.querySelector('.theme-toggle-icon');
+        const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+
+        button.setAttribute('aria-label', label);
+        button.setAttribute('title', label);
+
+        if (icon instanceof HTMLElement) {
+            icon.classList.toggle('bi-moon-stars-fill', !isDark);
+            icon.classList.toggle('bi-sun-fill', isDark);
+        }
+    });
+};
+
+const currentTheme = document.documentElement.getAttribute('data-bs-theme') === 'dark'
+    ? 'dark'
+    : 'light';
+
+applyTheme(currentTheme);
+
+document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+    button.addEventListener('click', () => {
+        const nextTheme = document.documentElement.getAttribute('data-bs-theme') === 'dark'
+            ? 'light'
+            : 'dark';
+
+        applyTheme(nextTheme);
+
+        try {
+            localStorage.setItem(themeStorageKey, nextTheme);
+        } catch {
+            console.warn('The theme preference could not be saved in local storage.');
+        }
+    });
+});
 
 /**
  * Display an accessible Bootstrap toast using text-only content.

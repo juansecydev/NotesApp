@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        @include('partials.theme-init')
         <title>@yield('title', config('app.name'))</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -15,7 +16,17 @@
                     <span>Notes</span>
                 </a>
 
-                <div class="dropdown ms-auto">
+                <button
+                    class="theme-toggle btn btn-sm rounded-circle ms-auto"
+                    type="button"
+                    data-theme-toggle
+                    aria-label="Switch color theme"
+                    title="Switch color theme"
+                >
+                    <i class="bi bi-moon-stars-fill theme-toggle-icon" aria-hidden="true"></i>
+                </button>
+
+                <div class="dropdown">
                     <button
                         class="app-user-menu dropdown-toggle d-flex align-items-center gap-2"
                         type="button"

@@ -12,6 +12,7 @@ A small notes application built to practice and learn Laravel. The app provides 
 - Edit existing notes
 - Delete notes
 - Demo account with sample notes
+- Dark and light display modes, saved locally in the browser
 
 ## Technologies
 

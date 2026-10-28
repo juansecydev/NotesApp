@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        @include('partials.theme-init')
 
         <title>Log in — {{ config('app.name') }}</title>
 
@@ -10,7 +11,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
-        <header class="container py-4">
+        <header class="container py-4 d-flex align-items-center justify-content-between">
             <a class="navbar-brand d-inline-flex align-items-center gap-2 fw-semibold" href="/">
                 <span class="brand-mark" aria-hidden="true">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,6 +21,9 @@
                 </span>
                 <span>{{ config('app.name') }}</span>
             </a>
+            <button class="theme-toggle btn btn-sm rounded-circle" type="button" data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
+                <i class="bi bi-moon-stars-fill theme-toggle-icon" aria-hidden="true"></i>
+            </button>
         </header>
 
         <main class="auth-page">

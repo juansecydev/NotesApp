@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        @include('partials.theme-init')
 
         <title>{{ config('app.name')}} — A home for your thoughts</title>
 
@@ -28,6 +29,17 @@
 
                 <div class="collapse navbar-collapse" id="main-navigation">
                     <ul class="navbar-nav ms-auto align-items-md-center gap-md-3">
+                        <li class="nav-item">
+                            <button
+                                class="theme-toggle btn btn-sm rounded-circle"
+                                type="button"
+                                data-theme-toggle
+                                aria-label="Switch color theme"
+                                title="Switch color theme"
+                            >
+                                <i class="bi bi-moon-stars-fill theme-toggle-icon" aria-hidden="true"></i>
+                            </button>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-secondary" href="#features">Features</a>
                         </li>
