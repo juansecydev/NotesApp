@@ -117,7 +117,8 @@ class NoteController extends Controller
             'note_content' => ['required', 'string', 'max:300'],
         ]));
 
-        return redirect()->route('notes.show', $note)->with('status', 'Note updated.');
+        //return redirect()->route('notes.show', $note)->with('status', 'Note updated.');
+        return redirect()->route('notes.index')->with('status', 'Note updated.');
     }
 
     /**
